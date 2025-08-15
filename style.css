@@ -112,11 +112,11 @@ hr {
     margin: 40px 0;
 }
 
-/* Container das etiquetas */
+/* Container das etiquetas na tela */
 .labels-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
     padding: 20px;
     border: 1px dashed #ccc;
     border-radius: 8px;
@@ -127,24 +127,32 @@ hr {
 .placeholder-text {
     color: #999;
     text-align: center;
-    grid-column: 1 / -1; /* Ocupa todas as colunas */
+    width: 100%;
 }
 
-/* Estilo de cada etiqueta */
+/* --- ESTILO DA ETIQUETA INDIVIDUAL --- */
 .label {
+    width: 9cm;
+    height: 3cm;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border: 1.5px solid #555;
+    border-radius: 4px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    overflow-wrap: break-word;
-    white-space: pre-wrap; /* Preserva quebras de linha e espaços do modelo */
+    overflow: hidden;
+    white-space: pre-wrap;
+    font-size: 10pt;
+    line-height: 1.3;
+
+    /* CORREÇÃO DEFINITIVA: Força o conteúdo a ficar junto */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Estilos para Impressão */
+/* --- ESTILOS PARA IMPRESSÃO --- */
 @media print {
     body {
-        padding: 0;
+        padding: 1cm;
         background-color: #fff;
     }
 
@@ -162,17 +170,22 @@ hr {
     }
 
     .labels-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Duas colunas na impressão */
-        gap: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5mm;
         border: none;
         padding: 0;
         background-color: #fff;
     }
 
     .label {
+        width: 9cm;
+        height: 3cm;
         border: 1px solid #000;
         box-shadow: none;
-        page-break-inside: avoid; /* Evita que a etiqueta seja cortada entre páginas */
+        page-break-inside: avoid;
+        /* Garante que a correção também se aplique na impressão */
+        display: flex;
+        flex-direction: column;
     }
 }
