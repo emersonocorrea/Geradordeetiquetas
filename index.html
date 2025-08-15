@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Etiquetas</title>
+    <title>Gerador de Etiquetas Profissional</title>
     <!-- Link para o arquivo de estilos CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Importa a biblioteca PapaParse para ler arquivos CSV -->
+    <!-- Importa a biblioteca PapaParse, essencial para ler arquivos CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
@@ -14,33 +14,35 @@
     <div class="container">
         <header>
             <h1>Gerador de Etiquetas a partir de Planilha</h1>
-            <p>Carregue um arquivo CSV, defina seu modelo e gere as etiquetas para impressão.</p>
+            <p>Carregue um arquivo CSV, defina seu modelo e gere as etiquetas para impressão instantaneamente.</p>
         </header>
 
         <main>
             <div class="config-section">
-                <!-- Seção para carregar o arquivo CSV -->
+                <!-- Seção 1: Carregar o arquivo CSV -->
                 <div class="input-group">
-                    <label for="csvFile">1. Carregar Planilha (CSV):</label>
+                    <label for="csvFile">1. Carregar Planilha (formato .csv)</label>
                     <input type="file" id="csvFile" accept=".csv">
                 </div>
 
-                <!-- Seção para o usuário definir o modelo da etiqueta -->
+                <!-- Seção 2: Definir o modelo da etiqueta -->
                 <div class="input-group">
-                    <label for="template">2. Defina o Modelo da Etiqueta:</label>
-                    <textarea id="template" rows="8" placeholder="Exemplo:
-Olá, {nome}!
+                    <label for="template">2. Defina o Modelo da Etiqueta</label>
+                    <textarea id="template" rows="8" placeholder="Exemplo de uso:
 
-Seu produto chegará em:
-{endereco}, {numero}
-CEP: {cep}"></textarea>
+LEITO: {LT}
+PACIENTE: {NOME DO PACIENTE}
+DIETA: {DIETA}
+
+OBSERVAÇÕES:
+{ALMOÇO / JANTAR}"></textarea>
                     <small>Use chaves `{}` com o nome exato da coluna da sua planilha.</small>
                 </div>
 
-                <!-- Botões de ação -->
+                <!-- Seção 3: Botões de Ação -->
                 <div class="actions">
                     <button id="generateBtn">Gerar Etiquetas</button>
-                    <button id="printBtn">Imprimir</button>
+                    <button id="printBtn">Imprimir Etiquetas</button>
                 </div>
             </div>
 
@@ -49,7 +51,7 @@ CEP: {cep}"></textarea>
             <!-- Área onde as etiquetas geradas serão exibidas -->
             <h2>Pré-visualização</h2>
             <div id="labels-container" class="labels-container">
-                <!-- As etiquetas geradas aparecerão aqui -->
+                <p class="placeholder-text">As etiquetas geradas aparecerão aqui...</p>
             </div>
         </main>
     </div>

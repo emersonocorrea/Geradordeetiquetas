@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = csvFileInput.files[0];
         const template = templateTextarea.value;
 
-        // Validações básicas
+        // Validações essenciais
         if (!file) {
             alert('Por favor, carregue um arquivo CSV.');
             return;
@@ -27,14 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         Papa.parse(file, {
             header: true, // Trata a primeira linha como cabeçalho
             skipEmptyLines: true, // Pula linhas vazias
+            transformHeader: header => header.trim(), // Limpa espaços dos nomes das colunas
+            // SOLUÇÃO PARA CARACTERES ESPECIAIS:
+            // Força o programa a ler o arquivo com a codificação correta para acentos.
+            encoding: "ISO-8859-1",
             complete: (results) => {
-                // Função chamada quando o parsing é concluído com sucesso
-                console.log("Colunas encontradas:", results.meta.fields);
-                console.log("Dados brutos:", results.data);
                 generateLabels(results.data, template);
             },
             error: (error) => {
-                // Função chamada em caso de erro no parsing
                 console.error('Erro ao processar o arquivo CSV:', error);
                 alert('Ocorreu um erro ao ler o arquivo CSV. Verifique o console para mais detalhes.');
             }
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Adiciona um ouvinte de evento ao botão "Imprimir"
     printButton.addEventListener('click', () => {
-        if (labelsContainer.children.length > 0) {
+        if (labelsContainer.children.length > 0 && !labelsContainer.querySelector('.placeholder-text')) {
             window.print();
         } else {
             alert('Gere as etiquetas antes de tentar imprimir.');
@@ -51,37 +51,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /**
-     * Função para gerar as etiquetas com base nos dados e no modelo.
+     * Função principal para gerar as etiquetas com base nos dados e no modelo.
      * @param {Array<Object>} data - Array de objetos, onde cada objeto representa uma linha da planilha.
      * @param {string} template - O modelo de texto fornecido pelo usuário.
      */
     function generateLabels(data, template) {
-        labelsContainer.innerHTML = '';
+        labelsContainer.innerHTML = ''; // Limpa o conteúdo anterior
 
-        // Filtra os dados para usar apenas linhas que realmente têm um paciente.
-        const validData = data.filter(row => row['NOME DO PACIENTE'] && row['NOME DO PACIENTE'].trim() !== '');
+        if (!data || data.length === 0) {
+            labelsContainer.innerHTML = '<p class="placeholder-text">Nenhum dado encontrado no arquivo.</p>';
+            return;
+        }
+
+        // Encontra a chave do paciente de forma dinâmica para maior robustez
+        const patientKey = Object.keys(data[0] || {}).find(k => k.toLowerCase().includes('paciente')) || 'NOME DO PACIENTE';
+        
+        const validData = data.filter(row => row[patientKey] && row[patientKey].trim() !== '');
 
         if (validData.length === 0) {
-            labelsContainer.innerHTML = '<p>Nenhum dado de paciente válido foi encontrado. Verifique se o arquivo CSV está limpo e se a coluna se chama exatamente "NOME DO PACIENTE".</p>';
+            labelsContainer.innerHTML = '<p class="placeholder-text">Nenhum dado de paciente válido foi encontrado. Verifique se seu arquivo CSV está limpo e possui uma coluna para o nome do paciente.</p>';
             return;
         }
         
-        // Itera sobre cada linha de dados VÁLIDA da planilha
+        // Itera sobre cada linha de dados válida
         validData.forEach(row => {
             let labelContent = template;
 
-            // Para cada coluna na linha, substitui o placeholder no modelo
+            // Itera sobre cada coluna da linha de dados
             for (const key in row) {
-                const cleanKey = key.trim();
-                const placeholder = `{${cleanKey}}`;
-                const value = row[key];
-                
-                // CORREÇÃO: Usando split e join para uma substituição de texto segura.
-                // Este método não se confunde com caracteres especiais como a barra '/'
-                // e substitui todas as ocorrências do placeholder.
+                const placeholder = `{${key}}`;
+                const value = row[key] || '';
                 labelContent = labelContent.split(placeholder).join(value);
             }
 
+            // Cria o elemento da etiqueta e o adiciona na tela
             const labelElement = document.createElement('div');
             labelElement.className = 'label';
             labelElement.textContent = labelContent;

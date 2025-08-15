@@ -1,24 +1,24 @@
-/* Importa uma fonte para um visual mais moderno */
+/* Importa uma fonte moderna para melhor legibilidade */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-/* Estilos gerais do corpo da página */
+/* Estilos gerais */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f0f2f5;
+    background-color: #f4f7f9;
     color: #333;
     margin: 0;
     padding: 20px;
     line-height: 1.6;
 }
 
-/* Container principal da aplicação */
+/* Container principal */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 20px 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 header {
@@ -29,11 +29,11 @@ header {
 }
 
 header h1 {
-    color: #1a237e;
+    color: #2c3e50;
     margin: 0;
 }
 
-/* Estilização dos grupos de input */
+/* Grupos de input */
 .input-group {
     margin-bottom: 25px;
 }
@@ -42,10 +42,9 @@ header h1 {
     display: block;
     font-weight: 500;
     margin-bottom: 8px;
-    color: #3f51b5;
+    color: #34495e;
 }
 
-/* Estilo para input de arquivo e textarea */
 input[type="file"],
 textarea {
     width: 100%;
@@ -53,35 +52,25 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
-    box-sizing: border-box; /* Garante que o padding não afete a largura total */
-    transition: border-color 0.3s;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 textarea {
-    resize: vertical; /* Permite redimensionamento vertical */
-}
-
-input[type="file"] {
-    padding: 8px;
+    resize: vertical;
 }
 
 input[type="file"]:hover,
 textarea:focus {
-    border-color: #3f51b5;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
     outline: none;
 }
 
-.input-group small {
-    color: #666;
-    font-size: 14px;
-    margin-top: 5px;
-    display: block;
-}
-
-/* Estilo para a seção de botões */
+/* Botões de Ação */
 .actions {
     display: flex;
-    gap: 15px; /* Espaçamento entre os botões */
+    gap: 15px;
     margin-top: 20px;
 }
 
@@ -92,26 +81,28 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
     color: #fff;
 }
 
 #generateBtn {
-    background-color: #43a047; /* Verde */
+    background-color: #27ae60;
 }
 
 #generateBtn:hover {
-    background-color: #388e3c;
+    background-color: #229954;
     transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
 }
 
 #printBtn {
-    background-color: #1e88e5; /* Azul */
+    background-color: #2980b9;
 }
 
 #printBtn:hover {
-    background-color: #1565c0;
+    background-color: #2471a3;
     transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
 }
 
 hr {
@@ -121,38 +112,37 @@ hr {
     margin: 40px 0;
 }
 
-h2 {
-    text-align: center;
-    color: #1a237e;
-    margin-bottom: 20px;
-}
-
-/* Container que exibe as etiquetas */
+/* Container das etiquetas */
 .labels-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
     padding: 20px;
     border: 1px dashed #ccc;
     border-radius: 8px;
-    min-height: 200px;
+    min-height: 150px;
     background-color: #fafafa;
 }
 
-/* Estilo de cada etiqueta individual */
+.placeholder-text {
+    color: #999;
+    text-align: center;
+    grid-column: 1 / -1; /* Ocupa todas as colunas */
+}
+
+/* Estilo de cada etiqueta */
 .label {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    overflow-wrap: break-word; /* Quebra de linha para textos longos */
-    white-space: pre-wrap; /* Preserva os espaços em branco e quebras de linha do modelo */
+    overflow-wrap: break-word;
+    white-space: pre-wrap; /* Preserva quebras de linha e espaços do modelo */
 }
 
-/* Estilos específicos para impressão */
+/* Estilos para Impressão */
 @media print {
-    /* Esconde elementos que não devem aparecer na impressão */
     body {
         padding: 0;
         background-color: #fff;
@@ -171,7 +161,6 @@ h2 {
         display: none;
     }
 
-    /* Organiza as etiquetas para a folha de impressão */
     .labels-container {
         display: grid;
         grid-template-columns: 1fr 1fr; /* Duas colunas na impressão */
@@ -182,8 +171,8 @@ h2 {
     }
 
     .label {
-        border: 1px solid #000; /* Borda visível na impressão */
+        border: 1px solid #000;
         box-shadow: none;
-        page-break-inside: avoid; /* Evita que uma etiqueta seja cortada entre duas páginas */
+        page-break-inside: avoid; /* Evita que a etiqueta seja cortada entre páginas */
     }
 }
