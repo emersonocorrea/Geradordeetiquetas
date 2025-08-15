@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Etiquetas</title>
+    <!-- Link para o arquivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Importa a biblioteca PapaParse para ler arquivos CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Gerador de Etiquetas a partir de Planilha</h1>
+            <p>Carregue um arquivo CSV, defina seu modelo e gere as etiquetas para impressão.</p>
+        </header>
+
+        <main>
+            <div class="config-section">
+                <!-- Seção para carregar o arquivo CSV -->
+                <div class="input-group">
+                    <label for="csvFile">1. Carregar Planilha (CSV):</label>
+                    <input type="file" id="csvFile" accept=".csv">
+                </div>
+
+                <!-- Seção para o usuário definir o modelo da etiqueta -->
+                <div class="input-group">
+                    <label for="template">2. Defina o Modelo da Etiqueta:</label>
+                    <textarea id="template" rows="8" placeholder="Exemplo:
+Olá, {nome}!
+
+Seu produto chegará em:
+{endereco}, {numero}
+CEP: {cep}"></textarea>
+                    <small>Use chaves `{}` com o nome exato da coluna da sua planilha.</small>
+                </div>
+
+                <!-- Botões de ação -->
+                <div class="actions">
+                    <button id="generateBtn">Gerar Etiquetas</button>
+                    <button id="printBtn">Imprimir</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Área onde as etiquetas geradas serão exibidas -->
+            <h2>Pré-visualização</h2>
+            <div id="labels-container" class="labels-container">
+                <!-- As etiquetas geradas aparecerão aqui -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Link para o arquivo JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

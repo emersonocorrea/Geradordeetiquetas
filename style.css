@@ -1,0 +1,189 @@
+/* Importa uma fonte para um visual mais moderno */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* Estilos gerais do corpo da página */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Container principal da aplicação */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+header h1 {
+    color: #1a237e;
+    margin: 0;
+}
+
+/* Estilização dos grupos de input */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #3f51b5;
+}
+
+/* Estilo para input de arquivo e textarea */
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+    transition: border-color 0.3s;
+}
+
+textarea {
+    resize: vertical; /* Permite redimensionamento vertical */
+}
+
+input[type="file"] {
+    padding: 8px;
+}
+
+input[type="file"]:hover,
+textarea:focus {
+    border-color: #3f51b5;
+    outline: none;
+}
+
+.input-group small {
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Estilo para a seção de botões */
+.actions {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os botões */
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    color: #fff;
+}
+
+#generateBtn {
+    background-color: #43a047; /* Verde */
+}
+
+#generateBtn:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+#printBtn {
+    background-color: #1e88e5; /* Azul */
+}
+
+#printBtn:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 40px 0;
+}
+
+h2 {
+    text-align: center;
+    color: #1a237e;
+    margin-bottom: 20px;
+}
+
+/* Container que exibe as etiquetas */
+.labels-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    min-height: 200px;
+    background-color: #fafafa;
+}
+
+/* Estilo de cada etiqueta individual */
+.label {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow-wrap: break-word; /* Quebra de linha para textos longos */
+    white-space: pre-wrap; /* Preserva os espaços em branco e quebras de linha do modelo */
+}
+
+/* Estilos específicos para impressão */
+@media print {
+    /* Esconde elementos que não devem aparecer na impressão */
+    body {
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .container {
+        box-shadow: none;
+        padding: 0;
+        border-radius: 0;
+    }
+    
+    header,
+    main > .config-section,
+    hr,
+    h2 {
+        display: none;
+    }
+
+    /* Organiza as etiquetas para a folha de impressão */
+    .labels-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Duas colunas na impressão */
+        gap: 10px;
+        border: none;
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .label {
+        border: 1px solid #000; /* Borda visível na impressão */
+        box-shadow: none;
+        page-break-inside: avoid; /* Evita que uma etiqueta seja cortada entre duas páginas */
+    }
+}
